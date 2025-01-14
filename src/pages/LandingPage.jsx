@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 const LandingPage = () => {
   const fadeIn = {
     hidden: { opacity: 0, y: 30 },
@@ -26,15 +27,17 @@ const LandingPage = () => {
             Unlock opportunities with verified companies, expert recommendations, and
             personalized training options for your industrial experience.
           </motion.p>
-          <motion.button
-            variants={{
-              hidden: { scale: 0.9, opacity: 0 },
-              visible: { scale: 1, opacity: 1, transition: { duration: 0.8 } },
-            }}
-            className="px-8 py-3 bg-teal-600 text-white font-semibold rounded-md shadow-md hover:bg-teal-700 transition"
-          >
-            Get Started
-          </motion.button>
+          <Link to={'/signup'}>
+            <motion.button
+              variants={{
+                hidden: { scale: 0.9, opacity: 0 },
+                visible: { scale: 1, opacity: 1, transition: { duration: 0.8 } },
+              }}
+              className="px-8 py-3 bg-teal-600 text-white font-semibold rounded-md shadow-md hover:bg-teal-700 transition"
+            >
+              Get Started
+            </motion.button>
+          </Link>
         </div>
       </motion.section>
 
@@ -123,36 +126,49 @@ const LandingPage = () => {
 
 
       {/* About Us Section */}
-      <section id="about" className="py-16 bg-white">
+      <section id="about" className="py-16 bg-gray-50">
         <div className="container mx-auto px-6 sm:px-10 text-center">
+          {/* Section Title */}
           <motion.h2
             initial="hidden"
             animate="visible"
             variants={fadeIn}
-            className="text-3xl sm:text-4xl font-extrabold text-teal-600 mb-8"
+            className="text-3xl sm:text-4xl font-extrabold text-teal-600 mb-6"
           >
             About Us
           </motion.h2>
-          <div className="flex justify-center items-center mb-8">
-            <img
-              src="/about.png"
-              alt="SIWES Connect"
-              className="w-52 h-52 mr-6"
-            />
-            <p className="text-lg sm:text-xl text-gray-700 max-w-3xl mx-auto">
-              SIWES Connect is a platform dedicated to bridging the gap between students and companies offering industrial training placements. Our mission is to provide a seamless and efficient placement process while offering guidance, resources, and expert recommendations. Our team of experts works tirelessly to ensure that students receive quality placements that align with their career goals.
-            </p>
+
+          {/* Content Wrapper */}
+          <div className="flex flex-col lg:flex-row items-center lg:justify-center gap-8 lg:gap-12">
+            {/* Image */}
+            <div className="flex-shrink-0">
+              <img
+                src="/about.png"
+                alt="SIWES Connect"
+                className="w-44 h-44 sm:w-52 sm:h-52 mx-auto rounded-lg shadow-md"
+              />
+            </div>
+
+            {/* Text Content */}
+            <div className="max-w-3xl text-center lg:text-left">
+              <p className="text-lg sm:text-xl text-gray-700 leading-relaxed">
+                <span className="font-bold text-teal-600">SIWES Connect</span> is a
+                platform dedicated to bridging the gap between students and companies
+                offering industrial training placements. Our mission is to provide a
+                seamless and efficient placement process while offering guidance,
+                resources, and expert recommendations.
+              </p>
+              <p className="mt-4 text-lg sm:text-xl text-gray-700 leading-relaxed">
+                Our team of experts works tirelessly to ensure that students receive
+                quality placements that align with their career goals. Together, we
+                build a brighter future for students everywhere.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
 
-      {/* Footer */}
-      <footer className="py-8 bg-gray-900 text-white">
-        <div className="container mx-auto px-6 sm:px-10 text-center">
-          <p>&copy; 2025 SIWES Connect. All rights reserved.</p>
-        </div>
-      </footer>
     </div>
   );
 };
