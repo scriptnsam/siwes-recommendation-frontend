@@ -1,5 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const fadeIn = {
@@ -16,9 +17,9 @@ const Header = () => {
           variants={fadeIn}
           className="container mx-auto flex justify-between items-center py-4 px-6 md:px-10"
         >
-          <h1 className="text-2xl sm:text-3xl font-bold text-teal-600">SIWES Connect</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-teal-600"><Link to={'./'}>SIWES Connect</Link></h1>
           <nav className="hidden md:flex items-center space-x-6">
-            <a href="#features" className="text-gray-600 hover:text-teal-600 transition">
+            {/* <a href="#features" className="text-gray-600 hover:text-teal-600 transition">
               Features
             </a>
             <a href="#about" className="text-gray-600 hover:text-teal-600 transition">
@@ -26,7 +27,7 @@ const Header = () => {
             </a>
             <a href="#contact" className="text-gray-600 hover:text-teal-600 transition">
               Contact
-            </a>
+            </a> */}
             {/* Navigation Buttons */}
             <div className="flex items-center space-x-4">
               <motion.button
@@ -36,13 +37,15 @@ const Header = () => {
               >
                 Login
               </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-4 py-2 border border-teal-600 text-teal-600 font-medium rounded-md shadow-md hover:bg-teal-600 hover:text-white transition"
-              >
-                Signup
-              </motion.button>
+              <Link to={'/signup'}>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-4 py-2 border border-teal-600 text-teal-600 font-medium rounded-md shadow-md hover:bg-teal-600 hover:text-white transition"
+                >
+                  Signup
+                </motion.button>
+              </Link>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
