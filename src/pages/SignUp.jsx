@@ -38,8 +38,10 @@ const SignUp = () => {
         setMessageType('error')
         return;
       }
+      const receivedData = response.data
+
       // User created
-      setResponseMessage(response.message)
+      setResponseMessage(receivedData.message)
       setMessageType('success')
 
       // Clear form fields
