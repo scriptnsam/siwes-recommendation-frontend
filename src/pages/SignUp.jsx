@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import RequestHandler from './components/RequestHandler'
+import ResponseMessage from './components/ResponseMessage';
+import { Link } from 'react-router-dom';
 
 const SignUp = () => {
   const [fullName, setFullName] = useState('');
@@ -39,6 +41,7 @@ const SignUp = () => {
         return;
       }
       const receivedData = response.data
+      console.log(receivedData)
 
       // User created
       setResponseMessage(receivedData.message)
@@ -50,7 +53,8 @@ const SignUp = () => {
       setPassword('');
       setConfirmPassword('');
     } catch (error) {
-      setResponseMessage(error.message)
+      setResponseMessage(error.response?.data?.message || "An error occurred.")
+      console.error(error)
       setMessageType('error')
       setIsLoading(false)
     }
@@ -63,12 +67,7 @@ const SignUp = () => {
 
         {/* Response Message Section */}
         {responseMessage && (
-          <div
-            className={`p-4 rounded-md text-center ${messageType === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-              }`}
-          >
-            {responseMessage}
-          </div>
+          <ResponseMessage messageType={messageType} responseMessage={responseMessage} />
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -134,7 +133,7 @@ const SignUp = () => {
 
         <div className="text-center text-sm text-gray-500">
           Already have an account?{' '}
-          <a href="/login" className="text-teal-600 hover:underline">Login</a>
+          <Link to="/login" className="text-teal-600 hover:underline">Login</Link>
         </div>
       </div>
     </div>

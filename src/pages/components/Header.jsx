@@ -19,24 +19,17 @@ const Header = () => {
         >
           <h1 className="text-2xl sm:text-3xl font-bold text-teal-600"><Link to={'./'}>SIWES Connect</Link></h1>
           <nav className="hidden md:flex items-center space-x-6">
-            {/* <a href="#features" className="text-gray-600 hover:text-teal-600 transition">
-              Features
-            </a>
-            <a href="#about" className="text-gray-600 hover:text-teal-600 transition">
-              About Us
-            </a>
-            <a href="#contact" className="text-gray-600 hover:text-teal-600 transition">
-              Contact
-            </a> */}
             {/* Navigation Buttons */}
             <div className="flex items-center space-x-4">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-4 py-2 bg-teal-600 text-white font-medium rounded-md shadow-md hover:bg-teal-700 transition"
-              >
-                Login
-              </motion.button>
+              <Link to={'/login'}>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-4 py-2 bg-teal-600 text-white font-medium rounded-md shadow-md hover:bg-teal-700 transition"
+                >
+                  Login
+                </motion.button>
+              </Link>
               <Link to={'/signup'}>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
