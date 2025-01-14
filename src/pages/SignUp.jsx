@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import RequestHandler from './components/RequestHandler'
 
 const SignUp = () => {
   const [fullName, setFullName] = useState('');
@@ -7,8 +8,9 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [responseMessage, setResponseMessage] = useState('');
   const [messageType, setMessageType] = useState(''); // success or error
+  const [isLoading, setIsLoading] = useState(false)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Basic form validation
@@ -18,15 +20,38 @@ const SignUp = () => {
       return;
     }
 
-    // Simulate a successful form submission (for now)
-    setResponseMessage('Account created successfully!');
-    setMessageType('success');
+    // continue to process data
+    const formData = {
+      fullName,
+      email,
+      password,
+    };
 
-    // Clear form fields
-    setFullName('');
-    setEmail('');
-    setPassword('');
-    setConfirmPassword('');
+    const api = new RequestHandler(import.meta.env.VITE_BACKEND_URL, null, 5000)
+    try {
+      setIsLoading(true)
+      const response = await api.post('/api/auth/register', formData)
+      setIsLoading(false)
+
+      if (response.success === false) {
+        setResponseMessage(response.message)
+        setMessageType('error')
+        return;
+      }
+      // User created
+      setResponseMessage(response.message)
+      setMessageType('success')
+
+      // Clear form fields
+      setFullName('');
+      setEmail('');
+      setPassword('');
+      setConfirmPassword('');
+    } catch (error) {
+      setResponseMessage(error.message)
+      setMessageType('error')
+      setIsLoading(false)
+    }
   };
 
   return (
@@ -97,8 +122,10 @@ const SignUp = () => {
             <button
               type="submit"
               className="w-full py-2 px-4 bg-teal-600 text-white font-semibold rounded-md hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
+              disabled={isLoading ? true : false}
+              style={{ opacity: isLoading ? 0.7 : 1 }}
             >
-              Sign Up
+              {isLoading ? 'Signing Up...' : 'Sign Up'}
             </button>
           </div>
         </form>
