@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import ResponseMessage from "./components/ResponseMessage";
 import RequestHandler from "./components/RequestHandler";
 import { Link } from "react-router-dom";
+import { setToken } from "../features/auth/authSlice";
+import { useDispatch } from "react-redux";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -9,6 +11,7 @@ const LoginPage = () => {
   const [responseMessage, setResponseMessage] = useState("");
   const [messageType, setMessageType] = useState(''); // success or error
   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,10 +30,13 @@ const LoginPage = () => {
       if (response.success === false) {
         setResponseMessage(response.message)
         setMessageType('error')
+        console.log(response)
         return;
       }
       const receivedData = response.data
       console.log(receivedData)
+
+      dispatch(setToken(receivedData.data.token))
 
       // User created
       setResponseMessage(receivedData.message)
@@ -101,7 +107,7 @@ const LoginPage = () => {
             style={{ opacity: isLoading ? '0.7' : '1' }}
             disabled={isLoading ? true : false}
           >
-            Login
+            {isLoading ? 'Processing...' : 'Login'}
           </button>
         </form>
 
