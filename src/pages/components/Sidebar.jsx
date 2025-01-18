@@ -14,7 +14,7 @@ const Sidebar = ({ setActiveTab }) => {
   return (
     <div>
       {/* Hamburger Menu for Mobile */}
-      <div className="lg:hidden p-4">
+      <div className="lg:hidden bg-gradient-to-r from-teal-800 to-black p-4">
         <button onClick={toggleSidebar} className="text-white">
           <FaBars className="text-2xl" />
         </button>
@@ -40,7 +40,7 @@ const Sidebar = ({ setActiveTab }) => {
           </div>
           <div>
             <h3 className="font-semibold text-lg">Abegunde Samuel</h3>
-            <p className="text-sm">Administrator</p>
+            <p className="text-sm">Student</p>
           </div>
         </div>
 
@@ -81,7 +81,7 @@ const Sidebar = ({ setActiveTab }) => {
 
         {/* Spacer */}
         <div className="mt-auto text-center text-sm text-gray-400">
-          © 2025 Exclusive Dashboard
+          © 2025 SIWES Connect Dashboard
         </div>
       </div>
     </div>

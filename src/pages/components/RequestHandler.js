@@ -46,6 +46,19 @@ class RequestHandler {
       return error.response.data;
     }
   }
+  async put(url, data, headers = {}) {
+    try {
+      const response = await this.axiosInstance.put(url, data, {
+        headers: {
+          ...headers
+        }
+      });
+      return response;
+    } catch (error) {
+      console.error('Error making PUT request:', error.message);
+      return error.response.data;
+    }
+  }
 }
 
 export default RequestHandler;

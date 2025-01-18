@@ -38,7 +38,7 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex max-lg:block bg-gray-100 min-h-screen ">
       <Sidebar setActiveTab={setActiveTab} />
       <main className="flex-1 p-6">
         {renderTabContent()}

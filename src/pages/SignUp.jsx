@@ -29,7 +29,7 @@ const SignUp = () => {
       password,
     };
 
-    const api = new RequestHandler(import.meta.env.VITE_BACKEND_URL, null, 5000)
+    const api = new RequestHandler(import.meta.env.VITE_BACKEND_URL, null, 10000)
     try {
       setIsLoading(true)
       const response = await api.post('/api/auth/register', formData)

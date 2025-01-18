@@ -22,7 +22,7 @@ const LoginPage = () => {
         password,
       };
 
-      const api = new RequestHandler(import.meta.env.VITE_BACKEND_URL, null, 5000)
+      const api = new RequestHandler(import.meta.env.VITE_BACKEND_URL, null, 10000)
       setIsLoading(true)
       const response = await api.post('/api/auth/login', formData);
       setIsLoading(false)
@@ -35,8 +35,9 @@ const LoginPage = () => {
       }
       const receivedData = response.data
       console.log(receivedData)
+      const token = receivedData.data.token
 
-      dispatch(setToken(receivedData.data.token))
+      dispatch(setToken({ token }))
 
       // User created
       setResponseMessage(receivedData.message)
