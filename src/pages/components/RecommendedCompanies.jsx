@@ -43,7 +43,7 @@ const RecommendedCompanies = ({ companies }) => {
                   {company.data.company_name}
                 </h3>
                 <p className="text-sm text-gray-600">{company.data.industry}</p>
-                <p className="text-gray-700 text-sm">Recommendation Score: <span className="text-teal-600 font-bold">{company.score.toFixed(2)}%</span></p>
+                <p className="text-gray-700 text-sm">Recommendation Score: <span className="text-teal-600 font-bold">{(company.score * 100).toFixed(2)}% - ({company.score.toFixed(2)}/1)</span></p>
                 <p className="text-sm text-gray-600">{company.data.email}</p>
               </div>
             </div>

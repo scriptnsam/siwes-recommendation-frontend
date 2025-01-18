@@ -158,8 +158,11 @@ const HomeTab = () => {
             />
           </div>
 
-          {/* Recommended companies */}
-          <RecommendedCompanies companies={recommendedCompanies} />
+
+          <div className="mt-8">
+            {/* Recommended companies */}
+            <RecommendedCompanies companies={recommendedCompanies} />
+          </div>
         </div>
       )}
     </>

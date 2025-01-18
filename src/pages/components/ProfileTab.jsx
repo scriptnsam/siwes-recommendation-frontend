@@ -111,16 +111,17 @@ const ProfileTab = () => {
       {openLogin ? (
         <LoginPage />
       ) : (
-        <div className="max-w-4xl mx-auto p-6">
+        <div className="lg:max-w-4xl mx-auto lg:p-6">
           <div className="bg-white rounded-lg shadow-lg p-6 space-y-6">
             {/* Profile Header */}
             <div className="flex items-center gap-6">
-              <div className="w-24 h-24 rounded-full bg-gray-300 flex items-center justify-center">
+              <div className="lg:w-24 lg:h-24 w-14 h-14 bg-transparent">
                 {/* Placeholder for Profile Image */}
-                <span className="text-4xl font-semibold text-white">SA</span>
+                {/* <span className="lg:text-4xl max-md:text-xl font-semibold text-white">SA</span> */}
+                <img src="/illustrations/Mavatar.svg" alt="user-avatar" className='w-full h-full' />
               </div>
               <div>
-                <h1 className="text-3xl font-semibold text-gray-900">{userDetails.name || 'scriptnsam'}</h1>
+                <h1 className="lg:text-3xl text-[18px] font-semibold text-gray-900">{userDetails.name || 'scriptnsam'}</h1>
                 <p className="text-lg text-gray-500">{userDetails.email || 'oluwafemisam40@gmail.com'}</p>
                 <p className="text-sm text-gray-400">{userDetails.role || 'User'}</p>
               </div>
@@ -129,32 +130,20 @@ const ProfileTab = () => {
             {/* User Details */}
             <div className="space-y-4">
               <div className="flex justify-between">
-                <p className="font-semibold text-gray-700">Full Name</p>
-                <p className="text-gray-600">{userDetails.name || 'Sdsae'}</p>
-              </div>
-              <div className="flex justify-between">
-                <p className="font-semibold text-gray-700">Email Address</p>
-                <p className="text-gray-600">{userDetails.email || 'oluwafemisam40@gmail.com'}</p>
-              </div>
-              <div className="flex justify-between">
-                <p className="font-semibold text-gray-700">Role</p>
-                <p className="text-gray-600">{userDetails.role || 'User'}</p>
-              </div>
-              <div className="flex justify-between">
                 <p className="font-semibold text-gray-700">Course of Study</p>
-                <p className="text-gray-600">{userProfile.course_of_study || 'N/A'}</p>
+                <p className="text-gray-600 text-right ">{userProfile.course_of_study || 'N/A'}</p>
               </div>
               <div className="flex justify-between">
                 <p className="font-semibold text-gray-700">Skills</p>
-                <p className="text-gray-600">{userProfile.skills?.length > 0 ? userProfile.skills.join(', ') : 'N/A'}</p>
+                <p className="text-gray-600 text-right ">{userProfile.skills?.length > 0 ? userProfile.skills.join(', ') : 'N/A'}</p>
               </div>
               <div className="flex justify-between">
                 <p className="font-semibold text-gray-700">Career Goals</p>
-                <p className="text-gray-600">{userProfile.career_goals?.length > 0 ? userProfile.career_goals.join(', ') : 'N/A'}</p>
+                <p className="text-gray-600 text-right ">{userProfile.career_goals?.length > 0 ? userProfile.career_goals.join(', ') : 'N/A'}</p>
               </div>
               <div className="flex justify-between">
                 <p className="font-semibold text-gray-700">Interests</p>
-                <p className="text-gray-600">{userProfile.interests?.length > 0 ? userProfile.interests.join(', ') : 'N/A'}</p>
+                <p className="text-gray-600 text-right ">{userProfile.interests?.length > 0 ? userProfile.interests.join(', ') : 'N/A'}</p>
               </div>
             </div>
 
