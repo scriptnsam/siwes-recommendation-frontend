@@ -36,10 +36,11 @@ const Sidebar = ({ setActiveTab }) => {
         <div className="flex items-center gap-4 mb-8">
           <div className="w-12 h-12 rounded-full bg-gray-500 flex items-center justify-center text-xl font-bold">
             {/* Placeholder for Profile Image */}
-            <span className="text-white">AB</span>
+            {/* <span className="text-white">AB</span> */}
+            <img src='/illustrations/Mavatar.svg' />
           </div>
           <div>
-            <h3 className="font-semibold text-lg">Abegunde Samuel</h3>
+            <h3 className="font-semibold text-lg">Dashboard</h3>
             <p className="text-sm">Student</p>
           </div>
         </div>

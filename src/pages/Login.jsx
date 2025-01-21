@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ResponseMessage from "./components/ResponseMessage";
 import RequestHandler from "./components/RequestHandler";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { setToken } from "../features/auth/authSlice";
 import { useDispatch } from "react-redux";
 
@@ -12,6 +12,7 @@ const LoginPage = () => {
   const [messageType, setMessageType] = useState(''); // success or error
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,6 +47,9 @@ const LoginPage = () => {
       // Clear form fields
       setEmail('')
       setPassword('')
+
+      navigate('/dashboard', { replace: true })
+
     } catch (error) {
       // Handle errors (e.g., invalid credentials, server issues)
       setResponseMessage(error.response?.data?.message || "An error occurred.");

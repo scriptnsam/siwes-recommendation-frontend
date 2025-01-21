@@ -4,6 +4,7 @@ import RecommendedCompanies from './RecommendedCompanies';
 import { useSelector } from 'react-redux';
 import LoginPage from '../Login';
 import RequestHandler from './RequestHandler';
+import LoadingUI from './LoadingUI';
 
 const HomeTab = () => {
   const [companyUuids, setCompanyUuids] = useState([]);
@@ -13,6 +14,8 @@ const HomeTab = () => {
   const [modalMessage, setModalMessage] = useState("");
   const [openLogin, setOpenLogin] = useState(false);
   const [recommendedCompanies, setRecommendedCompanies] = useState([])
+  const [recommendationsIsLoading, setRecommendationIsLoading] = useState(true)
+  const [possibleMessage, setPossibleMessage] = useState('No recommendation available.')
 
   const { token } = useSelector((state) => state.auth);
 
@@ -29,16 +32,25 @@ const HomeTab = () => {
           setOpenLogin(true)
         }
         console.log(response.message)
+        setModalType("error")
+        setModalMessage(response.message)
+        setIsModalOpen(true);
+        setRecommendationIsLoading(false)
         return;
       }
 
       const receivedData = response.data
+      console.log(receivedData)
+      if (receivedData.data.recommendations.length === 0) {
+        setRecommendationIsLoading(false)
+        setPossibleMessage(receivedData.message)
+        return;
+      }
       const recommendations = receivedData.data.recommendations[0].ranked_companies;
       const CompanyUUIDs = recommendations.map((company) => company.company_uuid);
       setGenrecommendations(recommendations)
       setCompanyUuids(CompanyUUIDs)
       console.log(CompanyUUIDs)
-      console.log(recommendations)
 
     } catch (error) {
       // setIsLoading(false)
@@ -73,7 +85,7 @@ const HomeTab = () => {
     const companyDetails = await fetchCompanyDetails(companyUuids);
     const orderedCompanies = combineDetailsWithScores(companyDetails, genrecommendations);
     setRecommendedCompanies(orderedCompanies) //FINAL STAGE
-    console.log("Ordered Companies with Scores:", orderedCompanies);
+    setRecommendationIsLoading(false)
   };
 
   useEffect(() => {
@@ -85,6 +97,8 @@ const HomeTab = () => {
       fetchData()
     }
   }, [companyUuids])
+
+
 
   return (
     <>
@@ -159,9 +173,14 @@ const HomeTab = () => {
           </div>
 
 
-          <div className="mt-8">
+
+          <div className="mt-8 ">
             {/* Recommended companies */}
-            <RecommendedCompanies companies={recommendedCompanies} />
+            {recommendationsIsLoading ? <LoadingUI message='Please wait while we match companies that you might be interested in...' /> :
+              recommendedCompanies.length === 0 ? <div className='text-gray-600 font-bold'>{possibleMessage}</div> :
+                <RecommendedCompanies companies={recommendedCompanies} />
+            }
+
           </div>
         </div>
       )}
