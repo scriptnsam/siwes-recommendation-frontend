@@ -2,13 +2,15 @@ import { useState } from "react";
 import RequestHandler from './RequestHandler';
 import { useSelector } from "react-redux";
 import ResponseMessage from "./ResponseMessage";
+import ResponseModal from "./ResponseModal";
 
 const RecommendedCompanies = ({ companies }) => {
   const [selectedCompany, setSelectedCompany] = useState(null);
   const [userMessage, setUserMessage] = useState("");
   const [openLogin, setOpenLogin] = useState(false);
   const { token } = useSelector((state) => state.auth);
-  const [responseMessage, setResponseMessage] = useState("");
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalIsOpen, setModalIsOpen] = useState("");
   const [responseType, setResponseType] = useState("");
   const [isLoading, setIsLoading] = useState(false)
 
@@ -45,7 +47,9 @@ const RecommendedCompanies = ({ companies }) => {
           // render login page
           setOpenLogin(true)
         }
-        console.log(response.message)
+        setModalMessage(response.message);
+        setResponseType("error");
+        setModalIsOpen(true)
         return;
       }
 
@@ -53,15 +57,17 @@ const RecommendedCompanies = ({ companies }) => {
       console.log(receivedData.message)
 
       closeModal();
-      setResponseMessage(receivedData.message);
+      setModalMessage(receivedData.message);
       setResponseType("success");
+      setModalIsOpen(true);
 
 
     } catch (error) {
       setIsLoading(false)
       console.error(error)
-      setResponseMessage(error.message);
+      setModalMessage(error.message);
       setResponseType("error");
+      setModalIsOpen(true)
     }
   };
 
@@ -156,7 +162,7 @@ const RecommendedCompanies = ({ companies }) => {
               </p>
               <button
                 type="submit"
-                className={`w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg font-medium ${isLoading ? 'opacity-1/2' : 'opacity-1'}`}
+                className={`w-full bg-teal-500 hover:bg-teal-600 text-white py-2 px-4 rounded-lg font-medium ${isLoading ? 'opacity-1/2' : 'opacity-1'}`}
                 disabled={isLoading}
               >
                 {isLoading ? 'Processing...' : 'Submit Application'}
@@ -167,11 +173,11 @@ const RecommendedCompanies = ({ companies }) => {
       )}
 
       {/* Response Modal */}
-      {responseMessage.length && (
-        <ResponseMessage
-          responseMessage={responseMessage}
-          messageType={responseType}
-        />
+      {modalIsOpen && (
+        <ResponseModal isOpen={modalIsOpen} message={modalMessage} type={responseType} onClose={() => {
+          closeModal()
+          setModalIsOpen(false)
+        }} />
       )}
     </section>
   );
