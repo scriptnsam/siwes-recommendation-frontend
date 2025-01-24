@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FaHome, FaUser, FaCog, FaBars, FaTimes, FaArrowRight } from 'react-icons/fa';
+import { FaHome, FaUser, FaCog, FaBars, FaTimes, FaArrowRight, FaMailBulk } from 'react-icons/fa';
 import { clearToken } from '../../features/auth/authSlice';
 import { useDispatch } from 'react-redux';
 
@@ -61,6 +61,14 @@ const Sidebar = ({ setActiveTab }) => {
           >
             <FaUser className="text-xl" />
             <span className="font-medium">Profile</span>
+          </button>
+
+          <button
+            className="flex items-center gap-4 px-4 py-3 rounded-lg hover:bg-teal-700 transition-colors"
+            onClick={() => setActiveTab('applications')}
+          >
+            <FaMailBulk className="text-xl" />
+            <span className="font-medium">Applications</span>
           </button>
 
           <button

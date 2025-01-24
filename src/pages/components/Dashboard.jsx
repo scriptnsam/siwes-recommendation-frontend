@@ -6,6 +6,7 @@ import SettingsTab from './SettingsTab';
 import { useSelector, useDispatch } from 'react-redux';
 import LoginPage from '../Login';
 import { setToken } from '../../features/auth/authSlice';
+import Applications from './Applications';
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('home'); // Track active tab
@@ -19,6 +20,8 @@ const Dashboard = () => {
         return <HomeTab />;
       case 'profile':
         return <ProfileTab />;
+      case 'applications':
+        return <Applications />;
       case 'settings':
         return <SettingsTab />;
       default:

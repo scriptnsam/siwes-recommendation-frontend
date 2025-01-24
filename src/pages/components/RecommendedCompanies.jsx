@@ -1,8 +1,16 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import RequestHandler from './RequestHandler';
+import { useSelector } from "react-redux";
+import ResponseMessage from "./ResponseMessage";
 
 const RecommendedCompanies = ({ companies }) => {
   const [selectedCompany, setSelectedCompany] = useState(null);
   const [userMessage, setUserMessage] = useState("");
+  const [openLogin, setOpenLogin] = useState(false);
+  const { token } = useSelector((state) => state.auth);
+  const [responseMessage, setResponseMessage] = useState("");
+  const [responseType, setResponseType] = useState("");
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleApply = (company) => {
     setSelectedCompany(company); // Open modal with selected company
@@ -13,12 +21,48 @@ const RecommendedCompanies = ({ companies }) => {
     setUserMessage(""); // Reset the user input
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(`User Message: ${userMessage}`);
     console.log(`Applied to: ${selectedCompany.company_name}`);
-    // You can add logic here to send application details to the backend
-    closeModal();
+
+
+    const api = new RequestHandler(import.meta.env.VITE_BACKEND_URL, {
+      Authorization: `Bearer ${token}`,
+      company_uuid: selectedCompany.uuid
+    }, 30000)
+
+    setIsLoading(true)
+    try {
+      const response = await api.post('/api/user/submit-application', {
+        additionalInformation: userMessage
+      });
+
+      setIsLoading(false)
+
+      if (response.success === false) {
+        if (response.code === 401) {
+          // render login page
+          setOpenLogin(true)
+        }
+        console.log(response.message)
+        return;
+      }
+
+      const receivedData = response.data
+      console.log(receivedData.message)
+
+      closeModal();
+      setResponseMessage(receivedData.message);
+      setResponseType("success");
+
+
+    } catch (error) {
+      setIsLoading(false)
+      console.error(error)
+      setResponseMessage(error.message);
+      setResponseType("error");
+    }
   };
 
   return (
@@ -103,7 +147,7 @@ const RecommendedCompanies = ({ companies }) => {
                   value={userMessage}
                   onChange={(e) => setUserMessage(e.target.value)}
                   placeholder="Add a message to your application (optional)"
-                  className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-transparent text-gray-600"
                   rows={3}
                 ></textarea>
               </div>
@@ -112,13 +156,22 @@ const RecommendedCompanies = ({ companies }) => {
               </p>
               <button
                 type="submit"
-                className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg font-medium"
+                className={`w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg font-medium ${isLoading ? 'opacity-1/2' : 'opacity-1'}`}
+                disabled={isLoading}
               >
-                Submit Application
+                {isLoading ? 'Processing...' : 'Submit Application'}
               </button>
             </form>
           </div>
         </div>
+      )}
+
+      {/* Response Modal */}
+      {responseMessage.length && (
+        <ResponseMessage
+          responseMessage={responseMessage}
+          messageType={responseType}
+        />
       )}
     </section>
   );
