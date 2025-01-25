@@ -48,7 +48,7 @@ const ProfileTab = () => {
         careerGoals: receivedData.data.Profile[0].career_goals,
         skills: receivedData.data.Profile[0].skills
       })
-      console.log(receivedData)
+      // console.log(receivedData)
       return;
     } catch (error) {
       console.error(error)
@@ -80,7 +80,7 @@ const ProfileTab = () => {
 
       // Successful, run getUserDetails again
       const receivedData = response.data
-      console.log("Received Data from Update", receivedData)
+      // console.log("Received Data from Update", receivedData)
       getUserDetails()
       setModalType("success")
       setModalMessage(receivedData.message)

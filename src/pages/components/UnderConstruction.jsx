@@ -1,4 +1,4 @@
-const UnderConstruction = () => {
+const UnderConstruction = ({ setActiveTab }) => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 text-gray-800">
       {/* Icon or Illustration */}
@@ -17,7 +17,7 @@ const UnderConstruction = () => {
       </p>
       {/* Back Button */}
       <button
-        onClick={() => window.location.href = ''}
+        onClick={() => setActiveTab("home")}
         className="px-6 py-2 bg-teal-500 hover:bg-teal-600 text-white rounded-lg"
       >
         Go Back

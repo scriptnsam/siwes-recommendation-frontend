@@ -1,10 +1,10 @@
 import React from 'react';
 import UnderConstruction from './UnderConstruction';
 
-const SettingsTab = () => {
+const SettingsTab = ({ setActiveTab }) => {
   return (
     <>
-      <UnderConstruction />
+      <UnderConstruction setActiveTab={setActiveTab} />
     </>
   );
 };

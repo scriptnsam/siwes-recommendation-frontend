@@ -70,9 +70,10 @@ const ResponseModal = ({ isOpen, onClose, type, message }) => {
         <div className="flex justify-end px-4 py-3 border-t">
           <button
             onClick={onClose}
+            autoFocus
             className={`px-4 py-2 text-white font-bold rounded-lg ${type === "success"
-                ? "bg-green-500 hover:bg-green-600"
-                : "bg-red-500 hover:bg-red-600"
+              ? "bg-green-500 hover:bg-green-600"
+              : "bg-red-500 hover:bg-red-600"
               }`}
           >
             Close

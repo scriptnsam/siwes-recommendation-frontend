@@ -59,6 +59,19 @@ class RequestHandler {
       return error.response.data;
     }
   }
+  async delete(url, headers = {}) {
+    try {
+      const response = await this.axiosInstance.delete(url, {
+        headers: {
+          ...headers
+        }
+      });
+      return response;
+    } catch (error) {
+      console.error('Error making DELETE request:', error.message);
+      return error.response.data;
+    }
+  }
 }
 
 export default RequestHandler;

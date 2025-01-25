@@ -21,9 +21,9 @@ const Dashboard = () => {
       case 'profile':
         return <ProfileTab />;
       case 'applications':
-        return <Applications />;
+        return <Applications setActiveTab={setActiveTab} />;
       case 'settings':
-        return <SettingsTab />;
+        return <SettingsTab setActiveTab={setActiveTab} />;
       default:
         return <HomeTab />;
     }
