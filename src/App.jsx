@@ -7,6 +7,9 @@ import Footer from './pages/components/Footer';
 import { Provider } from 'react-redux';
 import store from './app/store';
 import Dashboard from './pages/components/Dashboard';
+import CompanyLoginPage from './pages/Company/Login';
+import CompanySignUp from './pages/Company/SignUp';
+import CompanyDashboard from './pages/Company/Dashboard';
 
 function App() {
   return (
@@ -45,8 +48,31 @@ function App() {
             }
           />
 
+          {/* Company Routes */}
+          <Route
+            path="/company/login"
+            element={
+              <>
+                <Header />
+                <CompanyLoginPage />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/company/signup"
+            element={
+              <>
+                <Header />
+                <CompanySignUp />
+                <Footer />
+              </>
+            }
+          />
+
           {/* Dashboard Route */}
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/company/dashboard" element={<CompanyDashboard />} />
         </Routes>
       </Router>
     </Provider>
