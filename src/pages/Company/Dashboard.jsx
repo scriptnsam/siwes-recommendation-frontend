@@ -6,7 +6,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import CompantLoginPage from './Login'
 import { setToken } from '../../features/auth/companyAuthSlice';
 import OverView from './Overview';
-// import Applications from './Applications';
+import Applications from './Applications';
+import UserProfileModal from './UserProfileModal';
 
 const CompanyDashboard = () => {
   const [activeTab, setActiveTab] = useState('overview'); // Track active tab
@@ -20,10 +21,10 @@ const CompanyDashboard = () => {
         return <OverView />;
       // case 'profile':
       //   return <ProfileTab />;
-      // case 'applications':
-      //   return <Applications setActiveTab={setActiveTab} />;
-      // case 'settings':
-      //   return <SettingsTab setActiveTab={setActiveTab} />;
+      case 'applications':
+        return <Applications setActiveTab={setActiveTab} />;
+      case 'settings':
+        return <UserProfileModal />;
       default:
         return <OverView />;
     }

@@ -1,15 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaUser, FaCog, FaBars, FaTimes, FaArrowRight, FaMailBulk, FaChartPie } from 'react-icons/fa';
 import { clearToken } from '../../features/auth/companyAuthSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Sidebar = ({ setActiveTab }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const dispatch = useDispatch();
+  const { applications, applicationsSaved } = useSelector((state) => state.companyApplications);
+  const [companyName, setCompanyName] = useState('Dashboard')
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+
+  useEffect(() => {
+    if (applicationsSaved) {
+      setCompanyName(applications[0].company.company_name)
+    }
+  }, [])
 
   return (
     <div>
@@ -40,7 +48,7 @@ const Sidebar = ({ setActiveTab }) => {
             <img src='/illustrations/Mavatar.svg' />
           </div>
           <div>
-            <h3 className="font-semibold text-lg">Dashboard</h3>
+            <h3 className="font-semibold text-lg">{companyName}</h3>
             <p className="text-sm">Company</p>
           </div>
         </div>
