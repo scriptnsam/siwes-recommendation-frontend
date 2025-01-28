@@ -119,7 +119,7 @@ const CompanyLoginPage = () => {
         <p className="mt-4 text-sm text-center text-gray-600">
           Don't have an account?{" "}
           <Link
-            to="/company-signup"
+            to="/company/signup"
             className="text-indigo-500 hover:underline focus:outline-none"
           >
             Sign up here
