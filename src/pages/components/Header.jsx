@@ -24,7 +24,7 @@ const Header = () => {
           variants={fadeIn}
           className="container mx-auto flex justify-between items-center py-4 px-6 md:px-10"
         >
-          <h1 className="text-2xl sm:text-3xl font-bold text-teal-600"><Link to={'./'}>SIWES Connect</Link></h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-teal-600"><Link to={'/'}>SIWES Connect</Link></h1>
           <nav className={` hidden md:flex items-center space-x-6`}>
             {/* Navigation Buttons */}
             <div className="flex items-center space-x-4">
@@ -46,13 +46,15 @@ const Header = () => {
                   Signup
                 </motion.button>
               </Link>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-4 py-2 bg-gray-100 text-gray-700 font-medium rounded-md shadow-md hover:bg-gray-200 transition"
-              >
-                Company Login
-              </motion.button>
+              <Link to={'/company/login'}>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-4 py-2 bg-gray-100 text-gray-700 font-medium rounded-md shadow-md hover:bg-gray-200 transition"
+                >
+                  Company Login
+                </motion.button>
+              </Link>
             </div>
           </nav>
 
@@ -77,14 +79,15 @@ const Header = () => {
                   Signup
                 </motion.button>
               </Link>
-              <motion.button
-
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-4 py-2 bg-gray-100 text-gray-700 font-medium rounded-md shadow-md hover:bg-gray-200 transition"
-              >
-                Company Login
-              </motion.button>
+              <Link to={'/company/login'}>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-4 py-2 bg-gray-100 text-gray-700 font-medium rounded-md shadow-md hover:bg-gray-200 transition"
+                >
+                  Company Login
+                </motion.button>
+              </Link>
             </nav>
           </div>
 
