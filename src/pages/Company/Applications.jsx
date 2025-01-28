@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import RequestHandler from "../components/RequestHandler";
 import { useSelector } from "react-redux";
 import ResponseModal from "../components/ResponseModal";
+import UserProfileModal from './UserProfileModal';
 
 const Applications = ({ setActiveTab }) => {
   const [applications, setApplications] = useState([]);
@@ -9,6 +10,8 @@ const Applications = ({ setActiveTab }) => {
   const [modalType, setModalType] = useState('');
   const [modalMessage, setModalMessage] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [profileClicked, setProfileClicked] = useState(false);
+  const [profileDetails, setProfileDetails] = useState('');
 
   const { applications: app, applicationsSaved } = useSelector((state) => state.companyApplications);
 
@@ -58,6 +61,13 @@ const Applications = ({ setActiveTab }) => {
     }
   }
 
+  const viewProfile = (id) => {
+    // fiter the applications and get only details with this Id passed
+    const application = applications.filter((app) => app.uuid === id)
+    setProfileDetails(application[0])
+    setProfileClicked(true)
+  }
+
   useEffect(() => {
     if (applicationsSaved) {
       console.log(app[0])
@@ -72,9 +82,9 @@ const Applications = ({ setActiveTab }) => {
       {isModalOpen && (<ResponseModal isOpen={isModalOpen} message={modalMessage} onClose={() => setIsModalOpen(false)} type={modalType} />)}
       <div className="min-h-screen bg-gray-50 p-6">
         <header className="flex justify-between items-center pb-6 border-b border-gray-200">
-          <h1 className="text-2xl font-bold text-gray-800">Overview</h1>
+          <h1 className="text-2xl font-bold text-gray-800">Applications</h1>
           <button onClick={() => setActiveTab('overview')} className="bg-indigo-600 text-white px-4 py-2 rounded-lg shadow hover:bg-indigo-700">
-            + Add Application
+            Overview
           </button>
         </header>
 
@@ -121,6 +131,9 @@ const Applications = ({ setActiveTab }) => {
           </div>
         </main>
       </div>
+
+      {/* Profile view */}
+      {profileClicked && (<UserProfileModal user={profileDetails} isOpen={true} onClose={() => setProfileClicked(false)} />)}
     </>
   );
 };
