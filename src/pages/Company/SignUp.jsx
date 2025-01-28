@@ -195,7 +195,7 @@ const CompanySignUp = () => {
 
         <div className="text-center text-sm text-gray-500">
           Already have an account?{' '}
-          <Link to="/company-login" className="text-indigo-600 hover:underline">Login</Link>
+          <Link to="/company/login" className="text-indigo-600 hover:underline">Login</Link>
         </div>
       </div>
     </div>
