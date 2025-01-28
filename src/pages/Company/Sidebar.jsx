@@ -14,7 +14,7 @@ const Sidebar = ({ setActiveTab }) => {
   };
 
   useEffect(() => {
-    if (applicationsSaved) {
+    if (applicationsSaved && applications.company) {
       setCompanyName(applications[0].company.company_name)
     }
   }, [])
