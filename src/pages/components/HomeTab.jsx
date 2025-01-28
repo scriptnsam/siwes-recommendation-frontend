@@ -22,7 +22,7 @@ const HomeTab = () => {
   const getRecommendations = async () => {
     const api = new RequestHandler(import.meta.env.VITE_BACKEND_URL, {
       Authorization: `Bearer ${token}`
-    }, 30000)
+    }, 180000)
 
     try {
       const response = await api.get('/api/recommendations');
