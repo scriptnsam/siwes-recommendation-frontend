@@ -101,31 +101,37 @@ const Applications = ({ setActiveTab }) => {
                 </tr>
               </thead>
               <tbody>
-                {applications.map((app) => (
-                  <tr
-                    key={app.uuid}
-                    className="hover:bg-gray-50 text-gray-700 border-b border-gray-200"
-                  >
-                    <td className="py-3 px-6">{app.userDetails.name}</td>
-                    <td className="py-3 px-6">{app.userDetails.email}</td>
-                    <td className="py-3 px-6 text-sm">{(new Date(app.createdAt)).toLocaleString()}</td>
-                    <td className={`py-3 px-6 text-sm font-semibold ${app.status === "Under Review"
-                      ? "text-yellow-600"
-                      : app.status === "Interviewed"
-                        ? "text-green-600"
-                        : app.status === "Declined"
-                          ? "text-red-600" : "text-gray-600"
-                      }`}
-                    >
-                      {app.status}
-                    </td>
-                    <td className="py-3 px-6 text-right">
-                      <button onClick={() => viewProfile(app.uuid)} className="text-indigo-500 font-bold hover:underline">
-                        View Profile
-                      </button>
-                    </td>
+                {applications.length === 0 || applications === undefined ? (
+                  <tr className="text-center">
+                    <td colSpan="5" className="py-3 px-6 text-gray-600">No applications found</td>
                   </tr>
-                ))}
+                ) : (
+                  applications.map((app) => (
+                    <tr
+                      key={app.uuid}
+                      className="hover:bg-gray-50 text-gray-700 border-b border-gray-200"
+                    >
+                      <td className="py-3 px-6">{app.userDetails.name}</td>
+                      <td className="py-3 px-6">{app.userDetails.email}</td>
+                      <td className="py-3 px-6 text-sm">{(new Date(app.createdAt)).toLocaleString()}</td>
+                      <td className={`py-3 px-6 text-sm font-semibold ${app.status === "Under Review"
+                        ? "text-yellow-600"
+                        : app.status === "Interviewed"
+                          ? "text-green-600"
+                          : app.status === "Declined"
+                            ? "text-red-600" : "text-gray-600"
+                        }`}
+                      >
+                        {app.status}
+                      </td>
+                      <td className="py-3 px-6 text-right">
+                        <button onClick={() => viewProfile(app.uuid)} className="text-indigo-500 font-bold hover:underline">
+                          View Profile
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>

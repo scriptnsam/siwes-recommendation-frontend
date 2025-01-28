@@ -7,6 +7,7 @@ const Overview = () => {
   const { token } = useSelector((state) => state.companyAuth);
   const [overviewDetails, setOverviewDetails] = useState({
     applicationsReceived: NaN,
+    interviewScheduled: NaN,
     interviewed: NaN,
     declined: NaN,
     pending: NaN
@@ -39,12 +40,18 @@ const Overview = () => {
       console.log(receivedData)
       setOverviewDetails({
         applicationsReceived: receivedData.data.applicationsReceived,
+        interviewScheduled: receivedData.data.scheduled,
         declined: receivedData.data.declined,
         interviewed: receivedData.data.interviewed,
         pending: receivedData.data.pending_review
       })
 
       const mainData = receivedData.data
+
+      if (mainData.applicationsReceived === 0) {
+        console.log('No applications received')
+        return;
+      }
       // save data to redux store
       dispatch(setApplications({ applications: mainData }))
 
@@ -63,6 +70,7 @@ const Overview = () => {
       console.log('Applications already in redux store:', applications)
       setOverviewDetails({
         applicationsReceived: applications.applicationsReceived,
+        interviewScheduled: applications.scheduled,
         declined: applications.declined,
         interviewed: applications.interviewed,
         pending: applications.pending_review
@@ -71,6 +79,10 @@ const Overview = () => {
       getApplications()
     }
   }, [])
+
+  useEffect(() => {
+    console.log(overviewDetails)
+  }, [overviewDetails])
 
 
   return (
@@ -81,6 +93,10 @@ const Overview = () => {
         <div className="bg-white shadow rounded-lg p-4">
           <h2 className="text-lg font-medium text-gray-600">Applications Received</h2>
           <p className="text-4xl font-semibold text-indigo-600">{(overviewDetails.applicationsReceived).toString()}</p>
+        </div>
+        <div className="bg-white shadow rounded-lg p-4">
+          <h2 className="text-lg font-medium text-gray-600">Interview Scheduled</h2>
+          <p className="text-4xl font-semibold text-green-400">{(overviewDetails.interviewScheduled).toString()}</p>
         </div>
 
         <div className="bg-white shadow rounded-lg p-4">
