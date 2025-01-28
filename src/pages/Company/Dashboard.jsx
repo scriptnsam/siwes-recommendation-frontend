@@ -23,8 +23,8 @@ const CompanyDashboard = () => {
       //   return <ProfileTab />;
       case 'applications':
         return <Applications setActiveTab={setActiveTab} />;
-      case 'settings':
-        return <UserProfileModal />;
+      // case 'settings':
+      // return <UserProfileModal />;
       default:
         return <OverView />;
     }

@@ -51,11 +51,14 @@ const Overview = () => {
       if (mainData.applicationsReceived === 0) {
         console.log('No applications received')
         return;
-      }
-      // save data to redux store
-      dispatch(setApplications({ applications: mainData }))
+      } else {
+        // save data to redux store
+        dispatch(setApplications({ applications: mainData }))
 
-      console.log('Saved to redux store')
+        console.log('Saved to redux store')
+        return;
+      }
+
 
 
     } catch (error) {
