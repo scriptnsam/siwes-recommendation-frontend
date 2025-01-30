@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import RequestHandler from "../components/RequestHandler";
 import { useSelector } from "react-redux";
 import ResponseModal from "../components/ResponseModal";
-import UserProfileModal from "./UserProfileModal";
-import { use } from "framer-motion/client";
+// import UserProfileModal from "./UserProfileModal";
 
 const Applications = ({ setActiveTab }) => {
   const [applications, setApplications] = useState([]);
@@ -131,13 +130,13 @@ const Applications = ({ setActiveTab }) => {
       </div>
 
       {/* Profile view */}
-      {profileClicked && (
+      {/* {profileClicked && (
         <UserProfileModal
           user={profileDetails}
           isOpen={true}
           onClose={() => setProfileClicked(false)}
         />
-      )}
+      )} */}
     </>
   );
 };
