@@ -7,7 +7,7 @@ import AdminLoginPage from "./Login";
 import { setToken } from "../../features/auth/adminAuthSlice";
 import OverView from "./Overview";
 import Applications from "./Applications";
-import UserProfileModal from "./UserProfileModal";
+// import UserProfileModal from "./UserProfileModal";
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState("overview"); // Track active tab
