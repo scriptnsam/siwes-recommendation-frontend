@@ -28,6 +28,17 @@ const Students = ({ setActiveTab }) => {
     }
   };
 
+  const deleteStudent = async (id) => {
+    try {
+      const res = await api.delete(`/api/admin/delete-user/${id}`);
+      alert("Student deleted successfully");
+      getStudents();
+      return;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     getStudents();
   }, []);
@@ -53,6 +64,7 @@ const Students = ({ setActiveTab }) => {
                 <th className="py-3 px-6 text-left">Email Address</th>
                 <th className="py-3 px-6 text-left">Registration Date</th>
                 <th className="py-3 px-6 text-left">Status</th>
+                <th className="py-3 px-6 text-left">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -91,6 +103,15 @@ const Students = ({ setActiveTab }) => {
                       >
                         {student.status}
                       </td> */}
+
+                    <td className="py-3 px-6 text-right">
+                      <button
+                        onClick={() => deleteStudent(student.uuid)}
+                        className="bg-red-500 text-white p-1 rounded text-sm hover:bg-red-600 py-2"
+                      >
+                        Delete Student
+                      </button>
+                    </td>
                   </tr>
                 ))
               )}
