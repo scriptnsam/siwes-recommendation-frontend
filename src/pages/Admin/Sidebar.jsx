@@ -84,7 +84,7 @@ const Sidebar = ({ setActiveTab }) => {
 
           <button
             className="flex items-center gap-4 px-4 py-3 rounded-lg hover:bg-orange-700 transition-colors"
-            onClick={() => setActiveTab("settings")}
+            onClick={() => setActiveTab("students")}
           >
             <FaUser className="text-xl" />
             <span className="font-medium">Students</span>
@@ -92,7 +92,7 @@ const Sidebar = ({ setActiveTab }) => {
 
           <button
             className="flex items-center gap-4 px-4 py-3 rounded-lg hover:bg-orange-700 transition-colors"
-            onClick={() => setActiveTab("settings")}
+            onClick={() => setActiveTab("companies")}
           >
             <FaRegObjectGroup className="text-xl" />
             <span className="font-medium">Companies</span>

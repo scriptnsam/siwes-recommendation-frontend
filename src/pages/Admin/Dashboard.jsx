@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
-// import ProfileTab from './ProfileTab';
-// import SettingsTab from './SettingsTab';
 import { useSelector, useDispatch } from "react-redux";
 import AdminLoginPage from "./Login";
 import { setToken } from "../../features/auth/adminAuthSlice";
 import OverView from "./Overview";
 import Applications from "./Applications";
+import Students from "./Students";
+import Companies from "./CompaniesTab";
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState("overview"); // Track active tab
@@ -17,8 +17,10 @@ const AdminDashboard = () => {
     switch (activeTab) {
       case "overview":
         return <OverView />;
-      // case 'profile':
-      //   return <ProfileTab />;
+      case "students":
+        return <Students setActiveTab={setActiveTab} />;
+      case "companies":
+        return <Companies setActiveTab={setActiveTab} />;
       case "applications":
         return <Applications setActiveTab={setActiveTab} />;
       default:
