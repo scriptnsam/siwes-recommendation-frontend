@@ -90,7 +90,7 @@ const Overview = () => {
       </div>
 
       <div className="mt-6 flex justify-end">
-        <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg">
+        <button className="bg-orange-600 hover:bg-orange-700 text-white px-6 py-2 rounded-lg">
           View Detailed Analytics
         </button>
       </div>

@@ -2,16 +2,11 @@ import { useEffect, useState } from "react";
 import RequestHandler from "../components/RequestHandler";
 import { useSelector } from "react-redux";
 import ResponseModal from "../components/ResponseModal";
-// import UserProfileModal from "./UserProfileModal";
 
 const Applications = ({ setActiveTab }) => {
   const [applications, setApplications] = useState([]);
-  const { token } = useSelector((state) => state.companyAuth);
-  const [modalType, setModalType] = useState("");
-  const [modalMessage, setModalMessage] = useState("");
+  // const { token } = useSelector((state) => state.companyAuth);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [profileClicked, setProfileClicked] = useState(false);
-  const [profileDetails, setProfileDetails] = useState("");
 
   const api = new RequestHandler(import.meta.env.VITE_BACKEND_URL, null, 20000);
 
@@ -72,9 +67,10 @@ const Applications = ({ setActiveTab }) => {
                 <tr className="bg-gray-100 text-gray-600 uppercase text-sm">
                   <th className="py-3 px-6 text-left">Student's Name</th>
                   <th className="py-3 px-6 text-left">Email Address</th>
+                  <th className="py-3 px-6 text-left">Company</th>
+                  <th className="py-3 px-6 text-left">Industry</th>
                   <th className="py-3 px-6 text-left">Date</th>
                   <th className="py-3 px-6 text-left">Status</th>
-                  <th className="py-3 px-6 text-right">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -85,43 +81,33 @@ const Applications = ({ setActiveTab }) => {
                     </td>
                   </tr>
                 ) : (
-                  // applications.map((app) => (
-                  //   <tr
-                  //     key={app.uuid}
-                  //     className="hover:bg-gray-50 text-gray-700 border-b border-gray-200"
-                  //   >
-                  //     <td className="py-3 px-6">{app.userDetails.name}</td>
-                  //     <td className="py-3 px-6">{app.userDetails.email}</td>
-                  //     <td className="py-3 px-6 text-sm">
-                  //       {new Date(app.createdAt).toLocaleString()}
-                  //     </td>
-                  //     <td
-                  //       className={`py-3 px-6 text-sm font-semibold ${
-                  //         app.status === "Under Review"
-                  //           ? "text-yellow-600"
-                  //           : app.status === "Interviewed"
-                  //           ? "text-green-600"
-                  //           : app.status === "Declined"
-                  //           ? "text-red-600"
-                  //           : "text-gray-600"
-                  //       }`}
-                  //     >
-                  //       {app.status}
-                  //     </td>
-                  //     <td className="py-3 px-6 text-right">
-                  //       <button
-                  //         onClick={() => viewProfile(app.uuid)}
-                  //         className="text-indigo-500 font-bold hover:underline"
-                  //       >
-                  //         View Profile
-                  //       </button>
-                  //     </td>
-                  //   </tr>
-                  // ))
-
-                  applications.map((app) => {
-                    <div>{JSON.stringify(app)}</div>;
-                  })
+                  applications.map((app) => (
+                    <tr
+                      key={app.uuid}
+                      className="hover:bg-gray-50 text-gray-700 border-b border-gray-200"
+                    >
+                      <td className="py-3 px-6">{app.userDetails.name}</td>
+                      <td className="py-3 px-6">{app.userDetails.email}</td>
+                      <td className="py-3 px-6">{app.company.company_name}</td>
+                      <td className="py-3 px-6">{app.company.industry}</td>
+                      <td className="py-3 px-6 text-sm">
+                        {new Date(app.createdAt).toLocaleString()}
+                      </td>
+                      <td
+                        className={`py-3 px-6 text-sm font-semibold ${
+                          app.status === "Under Review"
+                            ? "text-yellow-600"
+                            : app.status === "Interviewed"
+                            ? "text-green-600"
+                            : app.status === "Declined"
+                            ? "text-red-600"
+                            : "text-gray-600"
+                        }`}
+                      >
+                        {app.status}
+                      </td>
+                    </tr>
+                  ))
                 )}
               </tbody>
             </table>

@@ -121,16 +121,6 @@ const AdminLoginPage = () => {
             {isLoading ? "Processing..." : "Login"}
           </button>
         </form>
-
-        <p className="mt-4 text-sm text-center text-gray-600">
-          Don't have an account?{" "}
-          <Link
-            to="/company/signup"
-            className="text-orange-500 hover:underline focus:outline-none"
-          >
-            Sign up here
-          </Link>
-        </p>
       </div>
     </div>
   );
