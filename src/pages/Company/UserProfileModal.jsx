@@ -1,8 +1,32 @@
 import React from "react";
 import { Dialog } from "@headlessui/react";
 import { XIcon } from "lucide-react";
+import RequestHandler from "../components/RequestHandler";
+import { useSelector } from "react-redux";
 
-const UserProfileModal = ({ isOpen, onClose, user, onUpdateStatus }) => {
+const UserProfileModal = ({ isOpen, onClose, user }) => {
+  const { token } = useSelector((state) => state.companyAuth);
+
+  const updateStatus = async (status) => {
+    const api = new RequestHandler(import.meta.env.VITE_BACKEND_URL, null, 20000);
+
+    try {
+      const res = await api.put(`/api/company/update-applications/${user.uuid}`, { status }, {
+        Authorization: `Bearer ${token}`
+      });
+      const response = res.data;
+
+      if (!response.success) {
+        alert(response.message);
+        return;
+      }
+      alert(response.message);
+      return onClose();
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return (
     <Dialog open={isOpen} onClose={onClose} className=" mt-10 mb-3 z-50">
       <div className="fixed inset-0 bg-black bg-opacity-50 " aria-hidden="true"></div>
@@ -63,19 +87,19 @@ const UserProfileModal = ({ isOpen, onClose, user, onUpdateStatus }) => {
             <p className="text-sm font-medium text-gray-500">Update Status</p>
             <div className="flex gap-2">
               <button
-                onClick={() => onUpdateStatus("Declined")}
+                onClick={() => updateStatus("Declined")}
                 className="px-4 py-2 text-sm font-semibold text-white bg-red-500 rounded-lg hover:bg-red-600"
               >
                 Decline
               </button>
               <button
-                onClick={() => onUpdateStatus("Scheduled for Interview")}
+                onClick={() => updateStatus("Scheduled")}
                 className="px-4 py-2 text-sm font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600"
               >
                 Schedule for Interview
               </button>
               <button
-                onClick={() => onUpdateStatus("Interviewed")}
+                onClick={() => updateStatus("Interviewed")}
                 className="px-4 py-2 text-sm font-semibold text-white bg-green-500 rounded-lg hover:bg-green-600"
               >
                 Mark as Interviewed
